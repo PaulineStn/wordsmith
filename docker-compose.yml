@@ -1,0 +1,19 @@
+services:
+  web:
+    build: ./web
+    ports:
+      - 8080:80
+    volumes:
+      - ./web/static:/app/static
+    depends_on:
+      - words
+
+  words:
+    build: ./words
+    depends_on:
+      - db
+
+  db:
+    build: ./db
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
